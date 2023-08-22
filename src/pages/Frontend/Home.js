@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Home() {
+
+    const [todos, setTodos] = useState([])
+
+    const handleDelete = todo => {
+        const todos = JSON.parse(localStorage.getItem("todos"))
+
+        const todosAfterDelete = todos.filter(t => t.id !== todo.id)
+
+        localStorage.setItem("todos", JSON.stringify(todosAfterDelete))
+
+        setTodos(todosAfterDelete)
+    }
+
     return (
         <main>
             <div className="container">
@@ -12,7 +25,7 @@ export default function Home() {
                 </div>
                 <div className="row">
                     <div className="col">
-                        <table class="table">
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -20,23 +33,20 @@ export default function Home() {
                                     <th>Location</th>
                                     <th>Date</th>
                                     <th>Description</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>Otto</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>Thornton</td>
-                                </tr>
+                                {todos.map((todo, i) => {
+                                    return <tr key={i}>
+                                        <th>1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>Otto</td>
+                                        <td>Edit | <span onClick={() => { handleDelete(todo) }}>Delete</span></td>
+                                    </tr>
+                                })}
                             </tbody>
                         </table>
                     </div>

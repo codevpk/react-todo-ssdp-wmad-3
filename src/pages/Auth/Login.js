@@ -19,6 +19,8 @@ export default function Login() {
         if (user) {
             if (user.password === password) {
                 dispatch({ type: "SET_LOGGED_IN", payload: { user } })
+                localStorage.setItem("isLoggenIn", "true")
+                localStorage.setItem("user", JSON.stringify(user))
             } else {
                 message.error("Password isn't valid")
             }
@@ -26,6 +28,8 @@ export default function Login() {
             message.error("User not found")
         }
 
+        // localStorage.removeItem("isLoggedIn")
+        // localStorage.removeItem("user")
     }
 
     return (

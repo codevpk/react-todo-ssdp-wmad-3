@@ -11,7 +11,7 @@ export default function Index() {
     const { isAuth } = useAuthContext()
     return (
         <Routes>
-            <Route path='/*' element={<PrivateRoute Component={Frontend} />} />
+            <Route path='/*' element={<Frontend />} />
             <Route path='/auth/*' element={!isAuth ? <Auth /> : <Navigate to="/" />} />
             <Route path='/dashboard/*' element={<PrivateRoute Component={Dashboard} />} />
         </Routes>
